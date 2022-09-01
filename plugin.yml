@@ -1,0 +1,38 @@
+name: DoublePlugin-1.16.5
+main: doublePlugin.DoublePlugin
+version: 2.0
+api-version: 1.16
+
+commands:  
+  check: 
+    description: check Player or Server Info
+    aliases: [확인, ghkrdls, 촏차]
+    permission: DoublePluginSystem
+    permission-message: 당신은 이 명령어를 사용할 권한이 존재하지 않습니다!
+  modify: 
+    description: modify Player or Server Info
+    aliases: [수정, tnwjd, ㅡㅐ야료]
+    permission: DoublePluginSystem
+    permission-message: 당신은 이 명령어를 사용할 권한이 존재하지 않습니다!
+  skull: 
+    description: get custom skull by texture
+    aliases: [스컬, tmzjf, 나ㅕㅣㅣ]
+    permission: DoublePluginSystem
+    permission-message: 당신은 이 명령어를 사용할 권한이 존재하지 않습니다!
+  properties: 
+    description: get custom skull by texture
+    aliases: [설정, tjfwjd, ㅔ개ㅔㄷㄱ샫ㄴ, pro, ㅔ개]
+    permission: DoublePluginSystem
+    permission-message: 당신은 이 명령어를 사용할 권한이 존재하지 않습니다!
+  startItem:
+   description: give player start Item
+   aliases: [기본템]
+  test:
+   description: test command
+   aliases: [테스트]
+   permission: DoublePluginSystem
+   permission-message: 당신은 이 명령어를 사용할 권한이 존재하지 않습니다!
+    
+permissions:
+  DoublePluginSystem:
+   default: op
