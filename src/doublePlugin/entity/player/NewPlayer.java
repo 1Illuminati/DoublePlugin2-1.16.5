@@ -12,6 +12,7 @@ import doublePlugin.scheduler.Scheduler;
 import doublePlugin.util.scoreBoard.ScoreBoardHelper;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;
+import org.bukkit.inventory.Inventory;
 
 public class NewPlayer extends NewPlayerObject {
 	private static final HashMap<UUID, NewPlayer> newPlayerMap = new HashMap<>();
@@ -29,11 +30,14 @@ public class NewPlayer extends NewPlayerObject {
     private int defNum;
     private ScoreBoardHelper scordBoard;
     private final boolean npcPlayer;
+    private boolean ignoreInvclose;
+    private ScanRunnalbe scanRunnalbe;
 
     protected NewPlayer(Player player) {
     	super(player);
         this.atkNum = 0;
         this.defNum = 0;
+        this.ignoreInvclose = false;
         
         if(!player.hasMetadata(NewPlayer.NPC)) {
         	npcPlayer = true;
@@ -181,6 +185,37 @@ public class NewPlayer extends NewPlayerObject {
 
     public String getUniqueIdtoString() {
         return player.getUniqueId().toString();
+    }
+
+    /**
+     * 인벤토리를 열고 있는 상태에서 인벤토리를 오픈할때 사용해야하며 기존의 close 이벤트를 거치지 않고 인벤토리를 오픈한다
+     * @param inv
+     */
+    public void openInvNotClose(Inventory inv) {
+        ignoreInvclose = true;
+        player.openInventory(inv);
+    }
+
+    public boolean getIgnoreInvclose() {
+        return this.ignoreInvclose;
+    }
+
+    public void setIgnoreInvclose(Boolean bool) {
+        this.ignoreInvclose = bool;
+    }
+
+    public void scannerPlayer(final ScanRunnalbe runnale) {
+        this.scanRunnalbe = runnale;
+    }
+
+    public ScanRunnalbe getScannerRunable() {
+        return this.scanRunnalbe;
+    }
+
+    public class ScanRunnalbe {
+        public void run(String str) {
+
+        }
     }
     
     public NewPlayer getNewPlayer() {

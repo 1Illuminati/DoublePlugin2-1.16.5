@@ -1,15 +1,13 @@
 package doublePlugin.event;
 
+import doublePlugin.event.chatEvent.NewPlayerChatEvent;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
-import org.bukkit.event.player.PlayerJoinEvent;
-import org.bukkit.event.player.PlayerQuitEvent;
-import org.bukkit.event.player.PlayerDropItemEvent;
-import org.bukkit.event.player.PlayerSwapHandItemsEvent;
+import org.bukkit.event.entity.EntityBreedEvent;
+import org.bukkit.event.player.*;
 import org.spigotmc.event.entity.EntityMountEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
@@ -33,6 +31,7 @@ public class MainEvent implements Listener {
     private final NewInventoryEvent newInventoryEvent = new NewInventoryEvent();
     private final NewBlockEvent newBlockEvent = new NewBlockEvent();
     private final NewEntityEvent newEntityEvent = new NewEntityEvent();
+    private final NewPlayerChatEvent newPlayerChatEvent = new NewPlayerChatEvent();
     
     
     @EventHandler
@@ -107,5 +106,15 @@ public class MainEvent implements Listener {
     @EventHandler
     public void foodLevelChangeEvent(FoodLevelChangeEvent e) {
     	this.newEntityEvent.newFoodLevelChangeEvent(e);
+    }
+
+    @EventHandler
+    public void entityBreedEvent(EntityBreedEvent e) {
+        this.newEntityEvent.newEntityBreedEvent(e);
+    }
+
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void asyncPlayerChatEvent(AsyncPlayerChatEvent e) {
+    	this.newPlayerChatEvent.newAsyncPlayerChatEvent(e);
     }
 }

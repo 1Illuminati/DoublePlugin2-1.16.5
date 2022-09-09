@@ -1,6 +1,8 @@
 package doublePlugin.event.InventoryEvent;
 
+import doublePlugin.entity.player.NewPlayer;
 import org.bukkit.Material;
+import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -33,7 +35,13 @@ public class NewInventoryEvent {
     }
 
     public void newInventoryCloseEvent(InventoryCloseEvent event) {
-    	InventoryView invView = event.getView();
+    	NewPlayer player = NewPlayer.getNewPlayer((Player) event.getPlayer());
+		if(player.getIgnoreInvclose()) {
+			player.setIgnoreInvclose(false);
+			return;
+		}
+
+		InventoryView invView = event.getView();
         InventoryManager inventoryAdmin = InventoryManager.getInventoryEvent(invView);
         if(inventoryAdmin != null){
             inventoryAdmin.close(event);
