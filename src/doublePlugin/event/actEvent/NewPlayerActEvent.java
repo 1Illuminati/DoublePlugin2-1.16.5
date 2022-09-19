@@ -15,6 +15,8 @@ import doublePlugin.item.ban.BanItemInfo.BanItemInfoEnum;
 import doublePlugin.properties.PropertiesEnum;
 import doublePlugin.properties.ServerProperties;
 
+import java.util.Objects;
+
 public class NewPlayerActEvent {
 	public void newPlayerInteractEvent(PlayerInteractEvent event) {
 		if(event.getHand() == EquipmentSlot.OFF_HAND) {
@@ -37,7 +39,7 @@ public class NewPlayerActEvent {
 		
 		Action action = event.getAction();
 		if(action == Action.LEFT_CLICK_BLOCK || action == Action.RIGHT_CLICK_BLOCK) {
-			Material material = event.getClickedBlock().getType();
+			Material material = Objects.requireNonNull(event.getClickedBlock()).getType();
 			if(BanItem.checkBanItem(material)) {
 				if(BanItem.getBanitemInfo(material).getAllow(BanItemInfoEnum.CLICK)) {
 					event.setCancelled(true);
@@ -48,7 +50,7 @@ public class NewPlayerActEvent {
 
 		ItemEvent itemEvent = ItemEvent.getItemEvent(itemStack);
 		if(itemEvent != null) {
-			Boolean eventCancelled = false;
+			boolean eventCancelled = false;
 			switch(action) {
 				case LEFT_CLICK_AIR:
 				case LEFT_CLICK_BLOCK:
@@ -89,7 +91,7 @@ public class NewPlayerActEvent {
 
 		ItemEvent itemEvent = ItemEvent.getItemEvent(itemStack);
 		if(itemEvent != null) {
-			Boolean eventCancelled = false;
+			boolean eventCancelled;
 			if(player.isSneaking()) {
 				eventCancelled = itemEvent.shiftSwapHand(player);
 			} else {
@@ -118,7 +120,7 @@ public class NewPlayerActEvent {
 
 		ItemEvent itemEvent = ItemEvent.getItemEvent(itemStack);
 		if(itemEvent != null) {
-			Boolean eventCancelled = false;
+			boolean eventCancelled;
 			if(player.isSneaking()) {
 				eventCancelled = itemEvent.dropItem(player);
 			} else {

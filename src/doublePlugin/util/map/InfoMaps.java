@@ -36,7 +36,7 @@ public class InfoMaps {
     private final CoolTime coolTime;
 
     protected InfoMaps(String locationFolder) {
-    	folder.folder(locationFolder);
+    	folder.mkdir(locationFolder);
     	this.locationFolder = locationFolder;
     	integerMap = getMap("integer", Integer.class);
     	doubleMap = getMap("double", Double.class);

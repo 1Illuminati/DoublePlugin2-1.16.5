@@ -7,7 +7,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 
 public class InventoryMaker {
-	private Inventory inventory;
+	private final Inventory inventory;
     
     public InventoryMaker(InventoryType invType, String invName) {
         this(invType, null, invName, null);

@@ -15,7 +15,7 @@ public class NewDamageEvent {
 		boolean check2 = false;
 		if (event.getDamager() instanceof Player) {
 			NewPlayer atkPlayer = NewPlayer.getNewPlayer((Player) event.getDamager());
-			check1 = !check1;
+			check1 = true;
 			atkPlayer.setCoolTimeSecond(NewPlayer.PLAYER_HIT_NUM, 3);
 			atkPlayer.addAtkNum();
 		}
@@ -34,7 +34,7 @@ public class NewDamageEvent {
 	}
 	
 	public void newEntityDamageEvent(EntityDamageEvent event) {
-		boolean check = ServerProperties.get(PropertiesEnum.FALLDAMAGE);
+		boolean check = ServerProperties.get(PropertiesEnum.FALL_DAMAGE);
 		
 		if (!check) {
 			if (event.getCause() == DamageCause.FALL) {

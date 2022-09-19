@@ -83,17 +83,15 @@ public class BukkitClassToStr {
     public Inventory stringToInventory (String invString) {
         String[] serializedBlocks = invString.split(SERIALIZER_STR);
         InventoryType invType = InventoryType.valueOf(serializedBlocks[0]);
-        int invSize = Integer.valueOf(serializedBlocks[1]);
+        int invSize = Integer.parseInt(serializedBlocks[1]);
         Inventory deserializedInventory;
-        
-        switch(invType) {
-        case CHEST : 
-        	deserializedInventory = Bukkit.createInventory(null, invSize);
-        break;
-        default :
-        	deserializedInventory = Bukkit.getServer().createInventory(null, invType);
-        }
-       
+
+		if (invType == InventoryType.CHEST)  {
+			deserializedInventory = Bukkit.createInventory(null, invSize);
+		} else {
+			deserializedInventory = Bukkit.getServer().createInventory(null, invType);
+		}
+
         for (int i = 2; i < serializedBlocks.length; i++) {
             deserializedInventory.setItem(i - 2, bukkitObjIn(invString, ItemStack.class));
         }

@@ -27,7 +27,7 @@ public class NewPlayerJoinAndQuitEvent {
         p.setBooleanValue(NewPlayer.PLAYER_CONNECT, true);
         p.sendMessage(ChatColor.WHITE + "현재 이 서버는 " + DoublePlugin.pluginName + "을 사용중입니다");
         
-        if (!ServerProperties.get(PropertiesEnum.ATKSPEED)) {
+        if (!ServerProperties.get(PropertiesEnum.ATK_SPEED)) {
         	p.getAttribute(Attribute.GENERIC_ATTACK_SPEED).setBaseValue(1000D);
         }
     }

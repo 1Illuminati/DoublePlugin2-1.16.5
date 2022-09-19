@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
+import java.util.Objects;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -29,12 +30,11 @@ public class JsonReadWrite {
         }
         
 		if(clazz == Integer.class) {
-			for(Object key : jsonObject.keySet()) {
-				jsonObject.put(key, Integer.valueOf(jsonObject.get(key).toString()));
-			}
+            JSONObject finalJsonObject = jsonObject;
+            Objects.requireNonNull(jsonObject).replaceAll((k, v) -> Integer.valueOf(finalJsonObject.get(k).toString()));
 		}
         
-        return NotNullStrMap.getMap(jsonObject);
+        return NotNullStrMap.getMap(Objects.requireNonNull(jsonObject));
     }
    
     

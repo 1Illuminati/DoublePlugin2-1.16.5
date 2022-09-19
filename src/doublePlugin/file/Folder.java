@@ -6,20 +6,24 @@ import doublePlugin.DoublePlugin;
 
 public class Folder {
 
-	private void makeFolder(String folderLoc) {
+	private File makeFolder(String folderLoc) {
 		File folder = new File("plugins/" + folderLoc);
 		if(!folder.exists()) {
 			folder.mkdir();
 			DoublePlugin.sendLog(folderLoc + " mkdir");
 		}
+
+		return folder;
 	}
 	
-	public void folder(String folderLoc) {
+	public File mkdir(String folderLoc) {
 		File folder = new File("plugins/doublePlugin/" + folderLoc);
 		if(!folder.exists()) {
 			folder.mkdir();
 			DoublePlugin.sendLog("doublePlugin/" + folderLoc + " mkdir");
 		}
+
+		return folder;
 	}
 
 	public void setDoublePluginFolder() {

@@ -17,7 +17,7 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 
 public class DoubleUtil {
-	private static JsonParser parser = new JsonParser();
+	private static final JsonParser parser = new JsonParser();
 	public static String spiltUUIDbyString(String texture) {
 		StringBuilder builder = new StringBuilder(texture);
 		for(int index = 1; index < builder.length(); index++) {
@@ -42,12 +42,10 @@ public class DoubleUtil {
             }
             br.close();
        
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+		return null;
 }
 	
 	public static String getSkinUrl(String uuid){
@@ -56,8 +54,7 @@ public class DoubleUtil {
         String jsonBase64 = o.get("properties").getAsJsonArray().get(0).getAsJsonObject().get("value").getAsString();
    
         o = parser.parse(new String(Base64.decodeBase64(jsonBase64))).getAsJsonObject();
-        String skinUrl = o.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject().get("url").getAsString();
-        return skinUrl;
+		return o.get("textures").getAsJsonObject().get("SKIN").getAsJsonObject().get("url").getAsString();
 }
 	
 	public static GameProfile getGameProfile(String texture, String displayName) {

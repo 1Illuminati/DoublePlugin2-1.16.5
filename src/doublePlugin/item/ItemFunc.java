@@ -73,9 +73,7 @@ public class ItemFunc {
 				|| material == Material.LEATHER_HELMET || material == Material.LEATHER_CHESTPLATE
 				|| material == Material.LEATHER_LEGGINGS || material == Material.LEATHER_BOOTS
 				|| material == Material.GOLDEN_HELMET || material == Material.GOLDEN_CHESTPLATE
-				|| material == Material.GOLDEN_LEGGINGS || material == Material.GOLDEN_BOOTS
-				|| material == Material.LEATHER_HELMET || material == Material.LEATHER_CHESTPLATE
-				|| material == Material.LEATHER_LEGGINGS || material == Material.LEATHER_BOOTS;
+				|| material == Material.GOLDEN_LEGGINGS || material == Material.GOLDEN_BOOTS;
 	}
 	
 	public static boolean checkNetheriteArmor(Material material) {
@@ -159,57 +157,22 @@ public class ItemFunc {
 	}
 
 	public static double getItemOriginDamage(Material material) {
-		switch (material) {
-		case NETHERITE_AXE :
-			return 10;
-		case IRON_AXE:
-		case STONE_AXE:
-		case DIAMOND_AXE:
-			return 9;
-		case WOODEN_AXE:
-		case GOLDEN_AXE:
-			return 7;
-		case IRON_HOE:
-		case STONE_HOE:
-		case DIAMOND_HOE:
-		case WOODEN_HOE:
-		case GOLDEN_HOE:
-		case NETHERITE_HOE:
-			return 1;
-		case IRON_SHOVEL:
-			return 4.5;
-		case NETHERITE_SHOVEL:
-			return 6.5;
-		case STONE_SHOVEL:
-			return 3.5;
-		case DIAMOND_SHOVEL:
-			return 5.5;
-		case WOODEN_SHOVEL:
-		case GOLDEN_SHOVEL:
-			return 2.5;
-		case IRON_PICKAXE:
-			return 4;
-		case STONE_PICKAXE:
-			return 3;
-		case DIAMOND_PICKAXE:
-			return 5;
-		case WOODEN_PICKAXE:
-		case GOLDEN_PICKAXE:
-			return 2;
-		case IRON_SWORD:
-		case NETHERITE_PICKAXE:
-			return 6;
-		case STONE_SWORD:
-			return 5;
-		case DIAMOND_SWORD:
-			return 7;
-		case NETHERITE_SWORD :
-			return 8;
-		case WOODEN_SWORD:
-		case GOLDEN_SWORD:
-			return 4;
-		default:
-			return 1;
-		}
+		return switch (material) {
+			case NETHERITE_AXE -> 10;
+			case IRON_AXE, STONE_AXE, DIAMOND_AXE -> 9;
+			case WOODEN_AXE, GOLDEN_AXE, DIAMOND_SWORD -> 7;
+			case IRON_SHOVEL -> 4.5;
+			case NETHERITE_SHOVEL -> 6.5;
+			case STONE_SHOVEL -> 3.5;
+			case DIAMOND_SHOVEL -> 5.5;
+			case WOODEN_SHOVEL, GOLDEN_SHOVEL -> 2.5;
+			case IRON_PICKAXE, WOODEN_SWORD, GOLDEN_SWORD -> 4;
+			case STONE_PICKAXE -> 3;
+			case DIAMOND_PICKAXE, STONE_SWORD -> 5;
+			case WOODEN_PICKAXE, GOLDEN_PICKAXE -> 2;
+			case IRON_SWORD, NETHERITE_PICKAXE -> 6;
+			case NETHERITE_SWORD -> 8;
+			default -> 1;
+		};
 	}
 }

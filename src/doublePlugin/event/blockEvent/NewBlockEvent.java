@@ -20,7 +20,6 @@ public class NewBlockEvent {
 		if(BanItem.checkBanItem(material)) {
 			if(BanItem.getBanitemInfo(material).getAllow(BanItemInfoEnum.PLACE)) {
 				event.setCancelled(true);
-				return;
 			}
 		}
 	}
@@ -35,7 +34,6 @@ public class NewBlockEvent {
 		if(BanItem.checkBanItem(material)) {
 			if(BanItem.getBanitemInfo(material).getAllow(BanItemInfoEnum.BREAK)) {
 				event.setCancelled(true);
-				return;
 			}
 		}
 	}

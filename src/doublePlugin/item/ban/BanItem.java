@@ -10,7 +10,7 @@ import doublePlugin.file.json.JsonReadWrite;
 import doublePlugin.util.map.NotNullStrMap;
 
 public class BanItem {
-	private static NotNullStrMap<BanItemInfo> banItemMap = new NotNullStrMap<>();
+	private static final NotNullStrMap<BanItemInfo> banItemMap = new NotNullStrMap<>();
 	private static final String FILE_LOC = "properties/banitem";
 	private static final JsonReadWrite json = new JsonReadWrite();
 	

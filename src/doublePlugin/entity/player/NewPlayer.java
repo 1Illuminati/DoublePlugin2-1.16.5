@@ -28,17 +28,15 @@ public class NewPlayer extends NewPlayerObject {
     private final NewOfflinePlayer newOfflinePlayer;
     private int atkNum;
     private int defNum;
-    private ScoreBoardHelper scordBoard;
+    private ScoreBoardHelper scoreBoard;
     private final boolean npcPlayer;
-    private boolean ignoreInvclose;
-    private ScanRunnalbe scanRunnalbe;
+    private ScanRunnable scanRunnable;
 
     protected NewPlayer(Player player) {
     	super(player);
         this.atkNum = 0;
         this.defNum = 0;
-        this.ignoreInvclose = false;
-        
+
         if(!player.hasMetadata(NewPlayer.NPC)) {
         	npcPlayer = true;
         	newOfflinePlayer = null;
@@ -47,10 +45,10 @@ public class NewPlayer extends NewPlayerObject {
         	newOfflinePlayer = NewOfflinePlayer.getNewOfflinePlayer(getUniqueId());
         }
         
-        loadIndividualSchedular();
+        loadIndividualScheduler();
     }
 
-    private void loadIndividualSchedular() {
+    private void loadIndividualScheduler() {
         Scheduler.infiniteRepeatScheduler(new RunnableEx() {
 
 			@Override
@@ -117,7 +115,7 @@ public class NewPlayer extends NewPlayerObject {
     }
     
     /**
-     * npc플레이어 일경우 null로 반환한다
+     * npc플레이어 일경우 null 반환한다
      * @return null or NewOfflinePlayer
      */
     public NewOfflinePlayer getNewOfflinePlayer() {
@@ -125,11 +123,11 @@ public class NewPlayer extends NewPlayerObject {
     }
     
     public ScoreBoardHelper getScoreBoardHelper() {
-    	return this.scordBoard;
+    	return this.scoreBoard;
     }
     
     public void setScoreBoardHelper(ScoreBoardHelper scoreBoardHelper) {
-    	this.scordBoard = scoreBoardHelper;
+    	this.scoreBoard = scoreBoardHelper;
     }
     
     public void putRunnable(String code, final Runnable run) {
@@ -189,30 +187,27 @@ public class NewPlayer extends NewPlayerObject {
 
     /**
      * 인벤토리를 열고 있는 상태에서 인벤토리를 오픈할때 사용해야하며 기존의 close 이벤트를 거치지 않고 인벤토리를 오픈한다
-     * @param inv
+     * @param inv 약간 늦게 오픈할 인벤토리
      */
     public void openInvNotClose(Inventory inv) {
-        ignoreInvclose = true;
-        player.openInventory(inv);
+        Scheduler.delayScheduler(new RunnableEx() {
+
+            @Override
+            public void function() {
+                player.openInventory(inv);
+            }
+        }, 2);
     }
 
-    public boolean getIgnoreInvclose() {
-        return this.ignoreInvclose;
+    public void scannerPlayer(final ScanRunnable runnable) {
+        this.scanRunnable = runnable;
     }
 
-    public void setIgnoreInvclose(Boolean bool) {
-        this.ignoreInvclose = bool;
+    public ScanRunnable getScannerRunnable() {
+        return this.scanRunnable;
     }
 
-    public void scannerPlayer(final ScanRunnalbe runnale) {
-        this.scanRunnalbe = runnale;
-    }
-
-    public ScanRunnalbe getScannerRunable() {
-        return this.scanRunnalbe;
-    }
-
-    public class ScanRunnalbe {
+    public static class ScanRunnable {
         public void run(String str) {
 
         }

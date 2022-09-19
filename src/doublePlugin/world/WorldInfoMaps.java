@@ -8,7 +8,7 @@ import doublePlugin.util.map.InfoMaps;
 
 public class WorldInfoMaps extends InfoMaps {
 	private static final String FILE_LOC = "info/world/";
-	private static String IS_SAVE = "isSave";
+	private static final String IS_SAVE = "isSave";
 	private static final HashMap<String, WorldInfoMaps> worldInfoMaps = new HashMap<>();
 	
 	public static boolean containsWorldInfoMaps(World world) {

@@ -11,8 +11,8 @@ import org.bukkit.inventory.MerchantRecipe;
 import doublePlugin.entity.player.NewPlayer;
 
 public class MerchantInventory {
-    private HashMap<String, MerchantRecipe> merchantRecipeMap = new HashMap<>();
-	private Merchant merchant;
+    private final HashMap<String, MerchantRecipe> merchantRecipeMap = new HashMap<>();
+	private final Merchant merchant;
 	
 	public MerchantInventory(String name) {
 		merchant = Bukkit.createMerchant(name);

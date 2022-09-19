@@ -25,7 +25,7 @@ public class FileHelper {
 	                if(!target.exists())
 	                    if (!target.mkdirs())
 	                        throw new IOException("Couldn't create world directory!");
-	                String files[] = file.list();
+	                String[] files = file.list();
 	                for (String filz : files) {
 	                    File srcFile = new File(file, filz);
 	                    File destFile = new File(target, filz);
@@ -53,7 +53,7 @@ public class FileHelper {
 	
 	private void fileDelete(File file) {
 		if(file.isDirectory()) {
-            String files[] = file.list();
+            String[] files = file.list();
             for (String str : files) {
             	fileDelete(new File(file, str));
             }

@@ -1,8 +1,6 @@
 package doublePlugin.event.InventoryEvent;
 
-import doublePlugin.entity.player.NewPlayer;
 import org.bukkit.Material;
-import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.CraftItemEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.inventory.InventoryCloseEvent;
@@ -17,6 +15,8 @@ import doublePlugin.item.ban.BanItem;
 import doublePlugin.item.ban.BanItemInfo.BanItemInfoEnum;
 import doublePlugin.properties.PropertiesEnum;
 import doublePlugin.properties.ServerProperties;
+
+import java.util.Objects;
 
 public class NewInventoryEvent {
 	
@@ -35,15 +35,10 @@ public class NewInventoryEvent {
     }
 
     public void newInventoryCloseEvent(InventoryCloseEvent event) {
-    	NewPlayer player = NewPlayer.getNewPlayer((Player) event.getPlayer());
-		if(player.getIgnoreInvclose()) {
-			player.setIgnoreInvclose(false);
-			return;
-		}
-
 		InventoryView invView = event.getView();
         InventoryManager inventoryAdmin = InventoryManager.getInventoryEvent(invView);
         if(inventoryAdmin != null){
+			DoublePlugin.sendLog("InventoryCloseEvent : " + invView.getTitle());
             inventoryAdmin.close(event);
         }
     }
@@ -65,13 +60,12 @@ public class NewInventoryEvent {
     }  
     
     public void newCraftItemEvent(CraftItemEvent event) {
-    	Material material = event.getCurrentItem().getType();
+    	Material material = Objects.requireNonNull(event.getCurrentItem()).getType();
 		if(BanItem.checkBanItem(material)) {
 			boolean check = BanItem.getBanitemInfo(material).getAllow(BanItemInfoEnum.CRAFT);
 			
 	    	if(check) {
 	    		event.setCancelled(true);
-	    		return;
 	    	}
     	}
     }

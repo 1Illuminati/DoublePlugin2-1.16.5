@@ -28,6 +28,8 @@ public class DoublePlugin extends JavaPlugin {
 	public static Plugin plugin;
 	private static PluginInfoMaps doublePluginInfoMap;
 
+	private static boolean debug = false;
+
 	
 	private void save() {
 		try {
@@ -81,22 +83,20 @@ public class DoublePlugin extends JavaPlugin {
 			e.printStackTrace();
 		}
 		
-		serverSchduler();
+		serverScheduler();
 	}
 	
-	private void serverSchduler() {
+	private void serverScheduler() {
 		Scheduler.infiniteRepeatScheduler(new RunnableEx() {
 
 			@Override
 			public void function() {
 				save();
-				sendLog("§4-----------------------------");
-				sendLog(""); 
+				sendLog("§4§m                              ");
 				sendLog("");
 				sendLog("§4" + pluginName + " 데이터 중간 저장 완료");
 				sendLog("");
-				sendLog("");
-				sendLog("§4-----------------------------");
+				sendLog("§4§m                              ");
 			}
 			
 		}, 24000, 24000);
@@ -105,13 +105,11 @@ public class DoublePlugin extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		load();
-		sendLog("§4-----------------------------");
+		sendLog("§4§m                              ");
 		sendLog(""); 
-		sendLog("");
 		sendLog("§4" + pluginName + " 플러그인 적용완료");
 		sendLog("");
-		sendLog("");
-		sendLog("§4-----------------------------");
+		sendLog("§4§m                              ");
 
 		reload = false;
 	}
@@ -120,13 +118,11 @@ public class DoublePlugin extends JavaPlugin {
 	public void onDisable() {
 		reload  = true;
 		save();
-		sendLog("§4-----------------------------");
-		sendLog("");
+		sendLog("§4§m                              ");
 		sendLog("");
 		sendLog("§4" + pluginName + " 플러그인 적용해제");
 		sendLog("");
-		sendLog("");
-		sendLog("§4-----------------------------");
+		sendLog("§4§m                              ");
 	}
 	
 	public void registerEvent() {
@@ -150,7 +146,13 @@ public class DoublePlugin extends JavaPlugin {
 		return DoublePlugin.doublePluginInfoMap;
 	}
 
-	public static void sendLog(String log) {
-		Bukkit.getConsoleSender().sendMessage("[" + DoublePlugin.pluginName + "] " + log);
+	public static void sendLog(String message) {
+		Bukkit.getConsoleSender().sendMessage("[" + DoublePlugin.pluginName + "] " + message);
+	}
+
+	public static void debugLog(String log) {
+		if(debug) {
+			Bukkit.getConsoleSender().sendMessage("[" + DoublePlugin.pluginName + " Debug] " + log);
+		}
 	}
 }

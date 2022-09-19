@@ -21,8 +21,8 @@ public class StartItemInv extends InventoryManager {
 	public static final String INV_CODE = DoublePlugin.pluginName + " Start Item";
 	private static final List<ItemStack> startItemList = new ArrayList<>();
 
-	public static void openInv(NewPlayer player) {
-		player.openInventory(InventoryManager.getInventoryEvent(INV_CODE).getInv(player));
+	public static Inventory getInventory(NewPlayer player) {
+		return InventoryManager.getInventoryEvent(INV_CODE).getInv(player);
 	}
 	
 	public static List<ItemStack> getStartItem() {
@@ -47,7 +47,8 @@ public class StartItemInv extends InventoryManager {
 			}
 		}
 		
-		PropertiesInv.openInv(NewPlayer.getNewPlayer((Player) event.getPlayer()));
+		NewPlayer player = NewPlayer.getNewPlayer((Player) event.getPlayer());
+		player.openInvNotClose(PropertiesInv.getInventory(player));
 	}
 
 	@Override

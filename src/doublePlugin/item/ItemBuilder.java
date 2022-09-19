@@ -12,8 +12,8 @@ import org.bukkit.material.MaterialData;
 
 @SuppressWarnings("deprecation")
 public class ItemBuilder {
-	private ItemStack itemStack;
-	private ItemMeta itemMeta;
+	private final ItemStack itemStack;
+	private final ItemMeta itemMeta;
 	
 	public ItemBuilder(Material material) {
 		this.itemStack = new ItemStack(material);

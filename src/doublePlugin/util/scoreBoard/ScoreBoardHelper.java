@@ -16,8 +16,8 @@ import org.bukkit.scoreboard.Team;
  *
  */
 public class ScoreBoardHelper {
-    private Scoreboard scoreboard;
-    private Objective sidebar;
+    private final Scoreboard scoreboard;
+    private final Objective sidebar;
 
     @SuppressWarnings("deprecation")
 	public ScoreBoardHelper(Player player) {

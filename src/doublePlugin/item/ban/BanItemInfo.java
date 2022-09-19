@@ -16,7 +16,7 @@ public class BanItemInfo {
 		
 		for(int i = 1; i < args.length; i++) {
 			String[] arg = args[i].split(cross);
-			banItemInfo.setAllow(BanItemInfoEnum.valueOf(arg[0]), Boolean.valueOf(arg[1]));
+			banItemInfo.setAllow(BanItemInfoEnum.valueOf(arg[0]), Boolean.parseBoolean(arg[1]));
 		}
 		
 		return banItemInfo;

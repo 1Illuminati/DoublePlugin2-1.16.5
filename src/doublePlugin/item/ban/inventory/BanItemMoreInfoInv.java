@@ -2,6 +2,7 @@ package doublePlugin.item.ban.inventory;
 
 import java.util.Arrays;
 
+import doublePlugin.properties.PropertiesInv;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryClickEvent;
@@ -54,16 +55,15 @@ public class BanItemMoreInfoInv extends InventoryManager {
 		String display = ChatColor.stripColor(itemStack.getItemMeta().getDisplayName());
 		BanItemInfo info = BanItem.getBanitemInfo(Material.valueOf(player.getStringValue(INV_CODE)));
 		BanItemInfoEnum infoEnum = BanItemInfoEnum.valueOf(display);
-		
-		if(infoEnum == null) {
-			return;
-		}
-		
+
 		info.setAllow(infoEnum, !info.getAllow(infoEnum));
 	}
 
 	@Override
-	public void close(InventoryCloseEvent event) {}
+	public void close(InventoryCloseEvent event) {
+		NewPlayer player = NewPlayer.getNewPlayer((Player) event.getPlayer());
+		player.openInvNotClose(BanItemInfoInv.getInventory(player));
+	}
 
 	@Override
 	public String getCode() {
